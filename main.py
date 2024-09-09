@@ -1,3 +1,6 @@
+# SSLv3Trap
+# v1.1 - 09.09.2024
+
 import socket
 import socketserver
 import argparse
@@ -80,7 +83,7 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
             self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.client_socket.connect((args.target_server_address, args.target_server_port))
             self.client_socket.setblocking(False)
-            self.client_socket.send(bytes("C %s:%s" % self.client_address, args.encoding))
+            self.client_socket.send(bytes("C %s:%s" % self.client_address, "ascii"))
         except Exception as error:
             Logger.error("ERROR: {1}:{2}: {0}", error, *self.client_address)
             self.request.close()
